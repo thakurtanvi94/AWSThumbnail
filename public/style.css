@@ -59,3 +59,12 @@
   font-weight: normal;
   margin: 0;
 }
+
+.center {
+  text-align: center;
+}
+
+.pagination {
+  width: 49%;
+  display: inline-block;
+}
