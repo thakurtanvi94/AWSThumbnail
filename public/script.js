@@ -1,6 +1,14 @@
-var prev = 0;
-var next = 0;
-var npp = 2;
+/**
+ * Srcipt for making api call and updating elements on html page.
+ */
+var prev = 0; //previous page 
+var next = 0; // next page
+var npp = 5; //no of results per page.
+
+/**
+ * This method fetches the results of thumbnails informaiton. 
+ * @param {*} page 
+ */
 function getThumbnails(page) {
     var xmlHttpRequest = new XMLHttpRequest();
     xmlHttpRequest.onreadystatechange = function() {
@@ -19,13 +27,10 @@ function getThumbnails(page) {
                 if(typeof paginate.next !== 'undefined'){
                     next = paginate.next;
                     document.getElementById("btn_next").style.display = "block";
-                    // nextPage(next);
                 } else document.getElementById("btn_next").style.display = "none";
                 if (typeof paginate.previous !== 'undefined'){
                     prev = paginate.previous;
-                    // document.getElementById("btn_next").style.display = "none";
                     document.getElementById("btn_prev").style.display = "block";
-                    // prevPage(prev);
                 } else document.getElementById("btn_prev").style.display = "none";
                     
             }
@@ -35,20 +40,29 @@ function getThumbnails(page) {
     xmlHttpRequest.send();
 }
 
+/**
+ * Add images to the thumbnail div
+ * @param {string} src 
+ * @param {string} name 
+ */
 function addImage(src, name) { 
-    let el = document.createElement('li');
-    let divElement = '<div class="details"><h3><a href="#">'+name+'</a></h3></div>';
-    el.innerHTML = '<a href="#" style="background-image: url('+src+');"></a>'+divElement;
-    let ul = document.getElementById('thumbnails-ul').appendChild(el);
+    let thumbnailDiv = '<div class="col-md-4"><div class="thumbnail"><a href='+src+' target="_blank"><img src='+src+' alt="Lights" style="width:100%"><div class="caption"><p>'+name+'</p></div></a></div></div>'; 
+    document.getElementById('thumbnails-div').innerHTML +=  thumbnailDiv;
 }
 getThumbnails(0);    
 
+/**
+ * Go to previous page
+ */
 function prevPage(){
-    document.getElementById('thumbnails-ul').innerHTML = '';
+    document.getElementById('thumbnails-div').innerHTML = '';
     getThumbnails(prev);    
 }
 
+/**
+ * Go to next page
+ */
 function nextPage(){
-    document.getElementById('thumbnails-ul').innerHTML = '';
+    document.getElementById('thumbnails-div').innerHTML = '';
     getThumbnails(next);    
 }

@@ -7,34 +7,39 @@
     <title>Thumbnails</title>
     <link rel="stylesheet" type="text/css" href="/demo.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="/script.js"></script>
   </head>
   <body>
-    <header class="ScriptHeader">
-      <div class="rt-container">
-        <div class="col-rt-12">
-          <div class="rt-heading">
-            <h1>Thumbnails</h1>
+    <div class="container">
+      <header class="ScriptHeader">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="rt-heading">
+              <h1>Thumbnails</h1>
+            </div>
           </div>
         </div>
+      </header>
+      <div class="row" style="margin-top: 10%;">
+        <div id="thumbnails-div"></div>
       </div>
-    </header>
-
-    <section>
-      <div class="rt-container">
-        <div class="col-rt-12">
-          <ul id="thumbnails-ul" class="image-list-small"></ul>
+      <div class="center">
+        <div class="pagination">
+          <a href="javascript:prevPage()" id="btn_prev" style="display: none"
+            >Prev</a
+          >
+          <a href="javascript:nextPage()" id="btn_next" style="display: none"
+            >Next</a
+          >
         </div>
-      </div>
-    </section>
-    <div class="center">
-      <div class="pagination">
-        <a href="javascript:prevPage()" id="btn_prev" style="display: none"
-          >Prev</a
-        >
-        <a href="javascript:nextPage()" id="btn_next" style="display: none"
-          >Next</a
-        >
       </div>
     </div>
   </body>

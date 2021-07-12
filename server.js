@@ -1,11 +1,14 @@
-var express = require('express');
-require('dotenv').config()
-var app = express();
+var express = require('express'); // required for making WEB APIs
+require('dotenv').config() // required for configuring environment variables.
+var app = express(); 
 const path = require('path');
 const Promise = require('bluebird');
-const mysql = require('mysql');
+const mysql = require('mysql'); // required for connecting to mysql database
 const s3_base_url = process.env.s3BaseUrl; //update this with the own s3 base url
 
+/**
+ * Making the DB connection
+ */
 var connection = mysql.createConnection({
     host : process.env.hostname,
     user : process.env.user,
@@ -13,21 +16,18 @@ var connection = mysql.createConnection({
     database : process.env.database,
 
 });
+/**
+ * Storing promise
+ */
 var queryAsync = Promise.promisify(connection.query.bind(connection));
 connection.connect();
+//Allowing access to the public folder
 app.use(express.static('./public'));
-// app.get('/thumbnails', function(request, response){
-//     console.log(request.query.pageIndex);
-//     conn.query('select concat("'+s3_base_url+'",filename) as image_url, filename as name from thumbnail_success order by thumbnail_size limit 5', function(error, results){
-//         if ( error ){
-//             console.log(error)
-//             response.status(400).send('Error in database operation');
-//         } else {
-//             // console.log(results);
-//             response.send(results);
-//         }
-//     });
-// });
+app.use(express.static('./image'));
+
+/**
+ * API for fetching thumbnails data from the table name thumbnail_success. Using pagination.
+ */
 app.get('/thumbnails', function(req, res){
     var numRows;
     var queryPagination;
@@ -37,13 +37,13 @@ app.get('/thumbnails', function(req, res){
     var skip = page * numPerPage;
     // Here we compute the LIMIT parameter for MySQL query
     var limit = skip + ',' + numPerPage;
-    queryAsync('SELECT count(1) as numRows FROM thumbnail_success')
+    queryAsync('SELECT count(1) as numRows FROM thumbnails')
     .then(function(results) {
       numRows = results[0].numRows;
       numPages = Math.ceil(numRows / numPerPage);
       console.log('number of pages:', numPages);
     })
-    .then(() => queryAsync('select concat("'+s3_base_url+'",filename) as image_url, filename as name from thumbnail_success order by thumbnail_size limit ' + limit))
+    .then(() => queryAsync('select concat("'+s3_base_url+'",file_name) as image_url, file_name as name from thumbnails order by file_size limit ' + limit))
     .then(function(results) {
       var responsePayload = {
         results: results
@@ -67,10 +67,14 @@ app.get('/thumbnails', function(req, res){
     });
 });
 
+/**
+ * Landing page. Reutns the index.html
+ */
 app.get('/',function(req,res) {
     res.sendFile(path.join(__dirname+'/index.html'));
 });
 
+//App running port.
 app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
+    console.log('Application started successfully!!');
 });
