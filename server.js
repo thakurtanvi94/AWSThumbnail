@@ -37,7 +37,7 @@ app.get('/thumbnails', function(req, res){
     var skip = page * numPerPage;
     // Here we compute the LIMIT parameter for MySQL query
     var limit = skip + ',' + numPerPage;
-    queryAsync('SELECT count(1) as numRows FROM thumbnails')
+    queryAsync('SELECT count(1) as numRows FROM thumbnail_success')
     .then(function(results) {
       numRows = results[0].numRows;
       numPages = Math.ceil(numRows / numPerPage);
