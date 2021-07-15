@@ -43,7 +43,7 @@ app.get('/thumbnails', function(req, res){
       numPages = Math.ceil(numRows / numPerPage);
       console.log('number of pages:', numPages);
     })
-    .then(() => queryAsync('select concat("'+s3_base_url+'",file_name) as image_url, file_name as name from thumbnails order by file_size limit ' + limit))
+    .then(() => queryAsync('select concat("'+s3_base_url+'",filename) as image_url, filename as name from thumbnail_success order by thumbnail_size limit ' + limit))
     .then(function(results) {
       var responsePayload = {
         results: results
