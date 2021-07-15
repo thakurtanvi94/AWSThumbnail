@@ -46,7 +46,7 @@ function getThumbnails(page) {
  * @param {string} name 
  */
 function addImage(src, name) { 
-    let thumbnailDiv = '<div class="col-md-4"><div class="thumbnail"><a href='+src+' target="_blank"><img src='+src+' alt="Lights" style="width:100%"><div class="caption"><p>'+name+'</p></div></a></div></div>'; 
+    let thumbnailDiv = '<div class="col-lg-4 col-sm-6"><img class="img-thumbnail" src='+src+' alt="" style="width:100%;max-height: 100%;height:250px"><div class="figure-caption text-center" style="margin-top:4%"><p>'+name+'</p></div></div>'; 
     document.getElementById('thumbnails-div').innerHTML +=  thumbnailDiv;
 }
 getThumbnails(0);    
