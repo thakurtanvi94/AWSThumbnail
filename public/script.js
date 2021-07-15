@@ -19,7 +19,7 @@ function getThumbnails(page) {
             for (let index = 0; index < response.results.length; index++) {
                 const element = response.results[index];
                 console.log(element.image_url)
-                let name = element.name.split('.').slice(0, -1).join('.')
+                let name = element.name.split('.').slice(0, -1).join('.').replace(/ /g, '%20')
                 addImage(element.image_url, name);
             }
             let paginate = response.pagination;
