@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thumbnails</title>
+    <title>Thumbnail Viewer</title>
     <link rel="stylesheet" type="text/css" href="/demo.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <meta charset="utf-8" />
@@ -17,19 +17,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="/script.js"></script>
   </head>
-  <body>
+  <body style="background-color:#f0b6c4">
     <div class="container">
-      <header class="ScriptHeader">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="rt-heading">
-              <h1>Thumbnails</h1>
-            </div>
-          </div>
+      <div class="row">
+        <div
+          class="page-header"
+          style="border-bottom: solid 4px #e04b80; padding-bottom: 10px"
+        >
+          <h1 style="color: #e04b80; font-weight: 700;">Thumbnail Viewer</h1>
         </div>
-      </header>
-      <div class="row" style="margin-top: 10%;">
-        <div id="thumbnails-div"></div>
+      </div>
+      <div class="row">
+        <div class="display-flex">
+          <div id="thumbnails-div"></div>
+        </div>
       </div>
       <div class="center">
         <div class="pagination">
